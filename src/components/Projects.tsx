@@ -1,148 +1,173 @@
 'use client';
 
+import { useState } from 'react';
+import Link from 'next/link';
+import { projectsData, Project } from '@/data/projects';
+import ProjectModal from './ProjectModal';
+import { GithubIcon } from './SocialIcons';
+import { ArrowUpRight, ExternalLink, Code2, FolderGit2 } from 'lucide-react';
+
 export default function Projects() {
-  const handlePortfolioBuilderClick = () => {
-    window.location.href = 'https://portfolio-builder-rho-gules.vercel.app/';
-  };
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>('All');
+
+  const categories = ['All', 'Full Stack', 'Marketplace', 'Company Website', 'Mini Project'];
+
+  const filteredProjects =
+    activeCategory === 'All'
+      ? projectsData
+      : projectsData.filter((p) => p.category === activeCategory);
 
   return (
     <>
-      <hr className="sec-divider" />
-      <div className="wrap" id="projects">
-        <div className="section-label fade-up">Projects</div>
-        <h2 className="section-heading fade-up">
-          Selected <em>Work</em>
-        </h2>
+      <section id="projects" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 border-t border-slate-200 dark:border-slate-800">
+        {/* Section Header */}
+        <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-emerald-700 dark:text-emerald-400 font-semibold mb-3">
+          <span className="w-6 h-[1.5px] bg-emerald-500 inline-block" />
+          <span>03 // Projects & Code</span>
+        </div>
 
-        <div className="project-card">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
-            <div className="project-header">
-              <span className="project-num">01 — Full Stack</span>
-              <span className="project-type">Featured</span>
-            </div>
-            <div className="project-title">EduSphere</div>
-            <div className="project-subtitle">Online Learning Management Platform</div>
-            <div className="project-desc">
-              A full-stack LMS for managing users, courses, and learning content. Built with a focus
-              on clean API design, role-based access, and a smooth student experience.
-            </div>
-            <div className="project-tags">
-              <span className="project-tag">React (Vite)</span>
-              <span className="project-tag">Tailwind</span>
-              <span className="project-tag">Node.js</span>
-              <span className="project-tag">Express</span>
-              <span className="project-tag">MongoDB</span>
-              <span className="project-tag">Multer</span>
-              <span className="project-tag">JWT</span>
-            </div>
-            <div className="project-arrow">
-              <a
-                className="social-link"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://github.com/mashroofmashru/Edusphere"
-              >
-                View on GitHub →
-              </a>
-            </div>
+            <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl tracking-tight text-slate-900 dark:text-slate-100">
+              Featured <span className="text-emerald-600 dark:text-emerald-400">Projects</span>
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-normal mt-2 max-w-2xl">
+              Web applications, REST backends, and frontend interfaces built with React, Node.js, and MongoDB.
+            </p>
           </div>
-          <ul className="project-bullets">
-            <li>Responsive frontend with React (Vite) and reusable Tailwind components</li>
-            <li>MVC architecture with clean separation of models, controllers & routes</li>
-            <li>RESTful APIs for authentication, course management & content access</li>
-            <li>JWT-based authentication with role-based access for students and admins</li>
-            <li>Structured MongoDB schemas for users, courses & enrollments</li>
-            <li>Secure password hashing and authorization middleware</li>
-            <li>Centralized error handling and consistent API validation</li>
-            <li>Tested APIs with Postman, version control via Git & GitHub</li>
-          </ul>
+
+          {/* Filter Matrix Tabs */}
+          <div className="flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`font-mono text-xs px-4 py-2 rounded-full border transition-all duration-200 ${
+                  activeCategory === cat
+                    ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm font-semibold'
+                    : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-emerald-500'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="project-card">
-          <div>
-            <div className="project-header">
-              <span className="project-num">02 — Full Stack</span>
-              <span className="project-type">Marketplace</span>
+        {/* Featured Projects Stack */}
+        <div className="space-y-8">
+          {filteredProjects.map((project, index) => (
+            <div
+              key={project.slug}
+              className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            >
+              {/* Info Column */}
+              <div className="lg:col-span-7 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest font-medium">
+                    0{index + 1} — {project.category}
+                  </span>
+                  <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 uppercase tracking-wider font-semibold">
+                    {project.typeBadge}
+                  </span>
+                </div>
+
+                <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 dark:text-slate-100">
+                  {project.title}
+                </h3>
+                <p className="font-mono text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-wider font-semibold">
+                  {project.subtitle}
+                </p>
+
+                <p className="text-slate-700 dark:text-slate-300 font-normal text-sm sm:text-base leading-relaxed">
+                  {project.summary}
+                </p>
+
+                {/* Tech Tags */}
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {project.tags.map((tag, tagIdx) => (
+                    <span
+                      key={tagIdx}
+                      className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-wrap items-center gap-3 pt-4">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider px-5 py-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all font-semibold shadow-sm"
+                  >
+                    <span>Full Details Page</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-emerald-600 transition-colors"
+                      title="GitHub Repository"
+                    >
+                      <GithubIcon className="w-4 h-4" />
+                    </a>
+                  )}
+
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-emerald-600 transition-colors"
+                      title="Live Site"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Architecture Bullets */}
+              <div className="lg:col-span-5 p-6 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-3">
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-slate-900 dark:text-slate-100 font-semibold pb-2 border-b border-slate-200 dark:border-slate-800">
+                  <Code2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Key Implementation Details
+                </div>
+                <ul className="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-normal">
+                  {project.architectureHighlights.map((highlight, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold shrink-0">—</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="project-title">Carverse</div>
-            <div className="project-subtitle">Automotive Marketplace Platform</div>
-            <div className="project-desc">
-              A full-stack automotive marketplace for browsing, listing, and managing car listings
-              with image uploads, search filters, and secure user actions.
-            </div>
-            <div className="project-tags">
-              <span className="project-tag">React (Vite)</span>
-              <span className="project-tag">Tailwind</span>
-              <span className="project-tag">Node.js</span>
-              <span className="project-tag">Express</span>
-              <span className="project-tag">MongoDB</span>
-              <span className="project-tag">Multer</span>
-              <span className="project-tag">jwt</span>
-            </div>
-            <div className="project-arrow">
-              <a
-                className="social-link"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://github.com/mashroofmashru/Carverse"
-              >
-                View on GitHub →
-              </a>
-            </div>
-          </div>
-          <ul className="project-bullets">
-            <li>Responsive frontend with dynamic car listing and data rendering</li>
-            <li>RESTful APIs using Node.js and Express with MVC structure</li>
-            <li>JWT-based authentication and authorization for user actions</li>
-            <li>MongoDB schemas for users & car listings with proper indexing</li>
-            <li>CRUD for car postings, user profiles and search filters</li>
-            <li>Image uploads via Multer and Cloudinary integration</li>
-            <li>Consistent error handling, validation & API response formatting</li>
-          </ul>
+          ))}
         </div>
 
-        <div className="section-label fade-up" style={{ marginTop: '3rem' }}>
-          Mini Projects
+        {/* Catalog Button */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider px-8 py-4 rounded-full border border-emerald-500/50 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all shadow-sm font-semibold"
+          >
+            <FolderGit2 className="w-4 h-4" />
+            <span>View All Projects Catalog Page</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </Link>
         </div>
-        <div className="mini-grid">
-          <div className="mini-card mini-card-clickable" onClick={handlePortfolioBuilderClick}>
-            <div className="mini-title">PortfolioBuilder</div>
-            <div className="mini-desc">
-              An instant portfolio generator that fetches GitHub data to create a sleek,
-              responsive developer portfolio with themes, insights, and shareable URLs.
-            </div>
-            <div className="mini-tags">
-              <span className="project-tag">React</span>
-              <span className="project-tag">Vite</span>
-              <span className="project-tag">GitHub API</span>
-            </div>
-          </div>
-          <div className="mini-card">
-            <div className="mini-title">Gemini Clone</div>
-            <div className="mini-desc">
-              A frontend AI chat interface built with React (Vite) and Tailwind CSS. Integrated OpenAI
-              API for real-time AI responses with a clean conversational UI.
-            </div>
-            <div className="mini-tags">
-              <span className="project-tag">React</span>
-              <span className="project-tag">Tailwind</span>
-              <span className="project-tag">OpenAI API</span>
-            </div>
-          </div>
-          <div className="mini-card">
-            <div className="mini-title">Netflix Clone</div>
-            <div className="mini-desc">
-              A Netflix-style frontend UI built with React.js and Tailwind CSS. Integrated TMDB API to
-              fetch and display real-time movie data with responsive layouts.
-            </div>
-            <div className="mini-tags">
-              <span className="project-tag">React</span>
-              <span className="project-tag">Tailwind</span>
-              <span className="project-tag">TMDB API</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
+
+      {/* Quick Detail Modal */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </>
   );
 }

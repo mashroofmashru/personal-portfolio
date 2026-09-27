@@ -1,55 +1,99 @@
+'use client';
+
+import { useState } from 'react';
+import { Mail, Phone, Copy, Check, ArrowUpRight } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from './SocialIcons';
+
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText('mashroofvlk@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2200);
+  };
+
   return (
-    <>
-      <hr className="sec-divider" />
-      <div className="wrap" id="contact">
-        <div id="contact-inner">
-          <div className="section-label fade-up" style={{ justifyContent: 'center' }}>
-            Contact
-          </div>
-          <h2 className="contact-heading fade-up">
-            Let's work<br />
-            <em>together</em>
-          </h2>
-          <p className="contact-sub fade-up">
-            Actively looking for my first professional role. Have an opportunity or project?
-            I'd love to hear from you.
-          </p>
-          <a href="mailto:mashroofvlk@gmail.com" className="contact-email fade-up">
-            mashroofvlk@gmail.com
-          </a>
-          <div className="contact-socials fade-up">
+    <section id="contact" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 border-t border-slate-200 dark:border-slate-800">
+      <div className="text-center max-w-4xl mx-auto space-y-6">
+        {/* Section Label */}
+        <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-emerald-700 dark:text-emerald-400 font-semibold">
+          <span className="w-6 h-[1.5px] bg-emerald-500 inline-block" />
+          <span>05 // Get in Touch</span>
+          <span className="w-6 h-[1.5px] bg-emerald-500 inline-block" />
+        </div>
+
+        {/* Display Heading */}
+        <h2 className="font-display font-bold text-4xl sm:text-7xl lg:text-8xl tracking-tight text-slate-900 dark:text-slate-100">
+          Get In <span className="text-emerald-600 dark:text-emerald-400">Touch</span>
+        </h2>
+
+        <p className="text-slate-700 dark:text-slate-300 font-normal text-base sm:text-xl leading-relaxed max-w-2xl mx-auto">
+          I am currently open to full-time entry-level backend and full-stack developer roles. Feel free to send an email or connect.
+        </p>
+
+        {/* Copy Email Button Card */}
+        <div className="pt-4">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-3 p-4 sm:px-8 sm:py-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md">
             <a
-              href="https://github.com/mashroofmashru"
-              className="social-link"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:mashroofvlk@gmail.com"
+              className="font-display text-xl sm:text-3xl text-slate-900 dark:text-slate-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-bold"
             >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-              GitHub
+              mashroofvlk@gmail.com
             </a>
-            <a
-              href="https://www.linkedin.com/in/mashroof-mashru/"
-              className="social-link"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={copyEmail}
+              className="font-mono text-xs uppercase tracking-wider px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all flex items-center gap-1.5 font-semibold"
+              title="Copy Email Address"
             >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-              LinkedIn
-            </a>
-            <a href="tel:+918078861815" className="social-link">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.7h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.36a16 16 0 0 0 5.73 5.73l1.73-1.73a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-              +91 8078861815
-            </a>
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <span>Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5" />
+                  <span>Copy Address</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
+
+        {/* Social Links */}
+        <div className="pt-8 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="https://github.com/mashroofmashru"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 font-mono text-xs uppercase tracking-wider hover:border-emerald-500 hover:text-emerald-600 transition-all shadow-sm font-semibold"
+          >
+            <GithubIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span>GitHub Profile</span>
+            <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/mashroof-mashru/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 font-mono text-xs uppercase tracking-wider hover:border-emerald-500 hover:text-emerald-600 transition-all shadow-sm font-semibold"
+          >
+            <LinkedinIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span>LinkedIn Profile</span>
+            <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+          </a>
+
+          <a
+            href="tel:+918078861815"
+            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 font-mono text-xs uppercase tracking-wider hover:border-emerald-500 hover:text-emerald-600 transition-all shadow-sm font-semibold"
+          >
+            <Phone className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span>+91 8078861815</span>
+          </a>
+        </div>
       </div>
-    </>
+    </section>
   );
 }
