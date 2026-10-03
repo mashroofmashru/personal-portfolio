@@ -3,7 +3,7 @@
 Welcome to the repository for my personal portfolio website! This project is a responsive, modern HTML, CSS, and vanilla JavaScript website built to showcase my skills, projects, and experience as a Full Stack Web Developer (MERN Stack).
 
 ## 🚀 Live Demo
-You can view the live website here: [https://mashroofmashru.github.io/personal-portfolio/](https://mashroofmashru.github.io/personal-portfolio/)
+You can view the live website here: [https://mashroof.me/](https://mashroof.me)
 
 ## ✨ Features
 - **Modern & Clean UI**: A sleek design with smooth animations and responsive layout.
