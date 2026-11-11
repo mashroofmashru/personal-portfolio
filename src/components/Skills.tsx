@@ -86,7 +86,7 @@ export default function Skills() {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-1.5">
+        {/* <div className="flex flex-wrap gap-1.5">
           <button onClick={() => setActiveTab('all')} data-active={activeTab === 'all'} className="tab">
             All Skills
           </button>
@@ -100,7 +100,7 @@ export default function Skills() {
               {cat.name.split(' ')[0]}
             </button>
           ))}
-        </div>
+        </div>*/}
       </div>
 
       {/* Skills Grid */}
