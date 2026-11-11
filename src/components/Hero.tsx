@@ -25,7 +25,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative pt-28 sm:pt-32 pb-12 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="hero" className="relative overflow-x-clip pt-28 sm:pt-32 pb-12 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-14 items-center">
         {/* Left: intro */}
         <div className="lg:col-span-7">
@@ -101,7 +101,7 @@ export default function Hero() {
         </div>
 
         {/* Right: code card */}
-        <div className="hidden lg:block lg:col-span-5 rise rise-4 pb-6">
+        <div className="lg:col-span-5 rise rise-4 pb-6 max-w-xl lg:max-w-none">
           <HeroCodeCard />
         </div>
       </div>

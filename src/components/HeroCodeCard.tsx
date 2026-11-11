@@ -39,7 +39,7 @@ export default function HeroCodeCard() {
   return (
     <div className="relative" aria-label="Developer profile summary">
       {/* Card */}
-      <div className="rotate-[1.5deg] hover:rotate-0 transition-transform duration-500 rounded-2xl bg-band border border-band-line shadow-[8px_8px_0_var(--accent)] overflow-hidden">
+      <div className="mr-2 sm:mr-0 rotate-[0.75deg] sm:rotate-[1.5deg] hover:rotate-0 transition-transform duration-500 rounded-2xl bg-band border border-band-line shadow-[6px_6px_0_var(--accent)] sm:shadow-[8px_8px_0_var(--accent)] overflow-hidden">
         {/* Window bar */}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-band-line">
           <span className="w-2.5 h-2.5 rounded-full bg-[#ff6b5e]" />
@@ -49,7 +49,7 @@ export default function HeroCodeCard() {
         </div>
 
         {/* Code */}
-        <pre className="font-code text-[13px] xl:text-sm leading-7 px-4 xl:px-5 py-4 overflow-x-auto">
+        <pre className="font-code text-[12px] sm:text-[13px] xl:text-sm leading-6 sm:leading-7 px-3 sm:px-4 xl:px-5 py-4 overflow-x-auto">
           {lines.map((line, i) => (
             <div key={i} className="flex">
               <span className="w-6 shrink-0 text-right pr-4 text-band-line select-none">{i + 1}</span>
@@ -68,7 +68,7 @@ export default function HeroCodeCard() {
       <Asterisk
         aria-hidden
         strokeWidth={2}
-        className="absolute -bottom-8 -right-3 w-12 h-12 text-accent animate-[spin_24s_linear_infinite] motion-reduce:animate-none"
+        className="absolute -bottom-7 right-0 sm:-bottom-8 sm:-right-3 w-10 h-10 sm:w-12 sm:h-12 text-accent animate-[spin_24s_linear_infinite] motion-reduce:animate-none"
       />
     </div>
   );
