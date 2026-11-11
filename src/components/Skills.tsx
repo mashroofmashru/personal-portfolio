@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Layers, Server, Database, Wrench, CheckCircle2 } from 'lucide-react';
+import { Layers, Server, Database, Wrench } from 'lucide-react';
 
 interface SkillCategory {
   id: string;
@@ -71,44 +71,30 @@ export default function Skills() {
     activeTab === 'all' ? categories : categories.filter((c) => c.id === activeTab);
 
   return (
-    <section id="skills" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 border-t border-slate-200 dark:border-slate-800">
-      {/* Section Header */}
-      <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-emerald-700 dark:text-emerald-400 font-semibold mb-3">
-        <span className="w-6 h-[1.5px] bg-emerald-500 inline-block" />
-        <span>02 // Skills & Technical Stack</span>
-      </div>
+    <section id="skills" className="py-14 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div className="section-label"><b>02</b> // Skills & Technical Stack</div>
 
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
         <div>
-          <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl tracking-tight text-slate-900 dark:text-slate-100">
-            Skills & <span className="text-emerald-600 dark:text-emerald-400">Technical Stack</span>
+          <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-[-0.03em] leading-[0.98] text-ink">
+            Skills & <span className="text-accent">Technical Stack</span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-normal mt-2 max-w-2xl">
+          <p className="text-sm sm:text-base text-muted mt-2 max-w-2xl">
             Technologies I use for building web applications, backend APIs, and database schemas.
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setActiveTab('all')}
-            className={`font-mono text-xs px-4 py-2 rounded-full border transition-all duration-200 ${
-              activeTab === 'all'
-                ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm font-semibold'
-                : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-emerald-500'
-            }`}
-          >
+        <div className="flex flex-wrap gap-1.5">
+          <button onClick={() => setActiveTab('all')} data-active={activeTab === 'all'} className="tab">
             All Skills
           </button>
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveTab(cat.id)}
-              className={`font-mono text-xs px-4 py-2 rounded-full border transition-all duration-200 ${
-                activeTab === cat.id
-                  ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm font-semibold'
-                  : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-emerald-500'
-              }`}
+              data-active={activeTab === cat.id}
+              className="tab"
             >
               {cat.name.split(' ')[0]}
             </button>
@@ -116,44 +102,34 @@ export default function Skills() {
         </div>
       </div>
 
-      {/* Widescreen Responsive Skills Grid */}
-      <div className={`grid grid-cols-1 sm:grid-cols-2 ${activeTab === 'all' ? 'lg:grid-cols-4' : 'lg:grid-cols-2'} gap-6`}>
+      {/* Skills Grid */}
+      <div
+        className={`grid grid-cols-1 sm:grid-cols-2 ${
+          activeTab === 'all' ? 'lg:grid-cols-4' : 'lg:grid-cols-2'
+        } gap-px bg-line border border-line rounded-[4px] overflow-hidden`}
+      >
         {filteredCategories.map((cat) => {
           const IconComp = cat.icon;
           return (
-            <div
-              key={cat.id}
-              className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200 dark:border-slate-800">
-                  <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                    <IconComp className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-mono text-sm uppercase tracking-wider font-semibold text-slate-900 dark:text-slate-100">
-                    {cat.name}
-                  </h3>
-                </div>
-
-                <div className="space-y-3">
-                  {cat.skills.map((skill, i) => (
-                    <div
-                      key={i}
-                      className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between"
-                    >
-                      <div>
-                        <span className="font-sans text-sm font-semibold text-slate-900 dark:text-slate-100 block">
-                          {skill.name}
-                        </span>
-                        <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider block mt-0.5">
-                          {skill.tag}
-                        </span>
-                      </div>
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                    </div>
-                  ))}
-                </div>
+            <div key={cat.id} className="bg-surface p-5">
+              <div className="flex items-center gap-2.5 mb-3 pb-3 border-b border-line">
+                <IconComp className="w-4 h-4 text-accent" />
+                <h3 className="font-mono text-xs uppercase tracking-wider font-medium text-ink">{cat.name}</h3>
               </div>
+
+              <ul>
+                {cat.skills.map((skill) => (
+                  <li
+                    key={skill.name}
+                    className="py-2 flex items-baseline justify-between gap-3 border-b border-dashed border-line last:border-0"
+                  >
+                    <span className="text-[15px] font-medium text-ink">{skill.name}</span>
+                    <span className="font-mono text-[10px] text-muted uppercase tracking-wider text-right">
+                      {skill.tag}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           );
         })}

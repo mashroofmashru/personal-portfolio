@@ -31,14 +31,11 @@ export default function ThemeToggle() {
     }
   };
 
-  if (!mounted) return null;
+  // Reserve the slot before mount so the navbar doesn't shift
+  if (!mounted) return <span className="inline-block w-8 h-8" aria-hidden />;
 
   return (
-    <button
-      onClick={toggleTheme}
-      aria-label="Toggle Theme"
-      className="p-2 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 hover:border-emerald-500/50 transition-all duration-200 focus:outline-none"
-    >
+    <button onClick={toggleTheme} aria-label="Toggle Theme" className="icon-btn p-2">
       {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
     </button>
   );

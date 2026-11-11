@@ -1,25 +1,24 @@
 import type { Metadata, Viewport } from 'next';
-import { Outfit, DM_Mono, Space_Grotesk } from 'next/font/google';
+import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 
-const outfit = Outfit({
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  variable: '--font-bricolage',
+  display: 'swap',
+});
+
+const plexSans = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-outfit',
+  variable: '--font-plex-sans',
   display: 'swap',
 });
 
-const dmMono = DM_Mono({
+const plexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-dm-mono',
-  display: 'swap',
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-space-grotesk',
+  weight: ['400', '500', '600'],
+  variable: '--font-plex-mono',
   display: 'swap',
 });
 
@@ -39,7 +38,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${dmMono.variable} ${spaceGrotesk.variable}`}>
+    <html
+      lang="en"
+      className={`dark ${bricolage.variable} ${plexSans.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.remove('dark')}catch(e){}`,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

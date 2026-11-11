@@ -8,23 +8,18 @@ export default function Footer() {
   };
 
   return (
-    <footer className="py-8 border-t border-slate-200 dark:border-slate-800 bg-slate-100/40 dark:bg-slate-950/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="font-mono text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">
+    <footer className="py-5 border-t border-line">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="font-mono text-[11px] uppercase tracking-wider text-muted">
           © {new Date().getFullYear()} Mashroof PP · All Rights Reserved
         </div>
 
-        <div className="font-mono text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
+        <div className="font-mono text-[11px] text-muted flex items-center gap-1.5">
           <span>Crafted with</span>
-          <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Next.js 14 & Tailwind CSS</span>
+          <span className="text-ink">Next.js 14 & Tailwind CSS</span>
         </div>
 
-        <button
-          onClick={scrollToTop}
-          className="p-2 rounded-lg bg-slate-200/60 dark:bg-slate-900 border border-slate-300/60 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-emerald-600 hover:border-emerald-500 transition-all"
-          title="Scroll to Top"
-          aria-label="Scroll to Top"
-        >
+        <button onClick={scrollToTop} className="icon-btn p-2" title="Scroll to Top" aria-label="Scroll to Top">
           <ArrowUp className="w-4 h-4" />
         </button>
       </div>

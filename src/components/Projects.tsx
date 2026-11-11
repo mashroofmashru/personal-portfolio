@@ -20,34 +20,27 @@ export default function Projects() {
 
   return (
     <>
-      <section id="projects" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 border-t border-slate-200 dark:border-slate-800">
-        {/* Section Header */}
-        <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-emerald-700 dark:text-emerald-400 font-semibold mb-3">
-          <span className="w-6 h-[1.5px] bg-emerald-500 inline-block" />
-          <span>03 // Projects & Code</span>
-        </div>
+      <section id="projects" className="py-14 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="section-label"><b>03</b> // Projects & Code</div>
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
           <div>
-            <h2 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl tracking-tight text-slate-900 dark:text-slate-100">
-              Featured <span className="text-emerald-600 dark:text-emerald-400">Projects</span>
+            <h2 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-[-0.03em] leading-[0.98] text-ink">
+              Featured <span className="text-accent">Projects</span>
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-normal mt-2 max-w-2xl">
+            <p className="text-sm sm:text-base text-muted mt-2 max-w-2xl">
               Web applications, REST backends, and frontend interfaces built with React, Node.js, and MongoDB.
             </p>
           </div>
 
-          {/* Filter Matrix Tabs */}
-          <div className="flex flex-wrap gap-2">
+          {/* Filter Tabs */}
+          <div className="flex flex-wrap gap-1.5">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`font-mono text-xs px-4 py-2 rounded-full border transition-all duration-200 ${
-                  activeCategory === cat
-                    ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm font-semibold'
-                    : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-emerald-500'
-                }`}
+                data-active={activeCategory === cat}
+                className="tab"
               >
                 {cat}
               </button>
@@ -56,52 +49,40 @@ export default function Projects() {
         </div>
 
         {/* Featured Projects Stack */}
-        <div className="space-y-8">
+        <div className="space-y-3">
           {filteredProjects.map((project, index) => (
-            <div
+            <article
               key={project.slug}
-              className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              className="panel p-5 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch transition-colors hover:border-line-strong"
             >
               {/* Info Column */}
-              <div className="lg:col-span-7 space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest font-medium">
-                    0{index + 1} — {project.category}
+              <div className="lg:col-span-7 flex flex-col">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-mono text-xs text-muted uppercase tracking-[0.12em]">
+                    <span className="text-accent">0{index + 1}</span> — {project.category}
                   </span>
-                  <span className="font-mono text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 uppercase tracking-wider font-semibold">
-                    {project.typeBadge}
-                  </span>
+                  <span className="chip uppercase tracking-wider">{project.typeBadge}</span>
                 </div>
 
-                <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 dark:text-slate-100">
+                <h3 className="mt-3 font-display font-bold text-3xl sm:text-4xl tracking-[-0.02em] text-ink">
                   {project.title}
                 </h3>
-                <p className="font-mono text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-wider font-semibold">
+                <p className="mt-1 font-mono text-xs text-accent uppercase tracking-wider">
                   {project.subtitle}
                 </p>
 
-                <p className="text-slate-700 dark:text-slate-300 font-normal text-sm sm:text-base leading-relaxed">
-                  {project.summary}
-                </p>
+                <p className="mt-3 text-ink-2 text-sm sm:text-base leading-relaxed">{project.summary}</p>
 
                 {/* Tech Tags */}
-                <div className="flex flex-wrap gap-1.5 pt-2">
-                  {project.tags.map((tag, tagIdx) => (
-                    <span
-                      key={tagIdx}
-                      className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-medium"
-                    >
-                      {tag}
-                    </span>
+                <div className="flex flex-wrap gap-1.5 mt-4">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="chip">{tag}</span>
                   ))}
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-wrap items-center gap-3 pt-4">
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider px-5 py-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all font-semibold shadow-sm"
-                  >
+                <div className="flex flex-wrap items-center gap-2 mt-auto pt-5">
+                  <Link href={`/projects/${project.slug}`} className="btn btn-primary py-2.5">
                     <span>Full Details Page</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </Link>
@@ -111,7 +92,7 @@ export default function Projects() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-emerald-600 transition-colors"
+                      className="icon-btn"
                       title="GitHub Repository"
                     >
                       <GithubIcon className="w-4 h-4" />
@@ -123,7 +104,7 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-emerald-600 transition-colors"
+                      className="icon-btn"
                       title="Live Site"
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -133,30 +114,27 @@ export default function Projects() {
               </div>
 
               {/* Architecture Bullets */}
-              <div className="lg:col-span-5 p-6 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-3">
-                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-slate-900 dark:text-slate-100 font-semibold pb-2 border-b border-slate-200 dark:border-slate-800">
-                  <Code2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Key Implementation Details
+              <div className="lg:col-span-5 p-5 rounded-[3px] bg-surface-2 border border-line">
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-ink font-medium pb-2.5 mb-3 border-b border-line">
+                  <Code2 className="w-4 h-4 text-accent" /> Key Implementation Details
                 </div>
-                <ul className="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-normal">
+                <ul className="space-y-2 text-sm text-ink-2 leading-snug">
                   {project.architectureHighlights.map((highlight, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <span className="text-emerald-600 dark:text-emerald-400 font-bold shrink-0">—</span>
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <span className="font-mono text-[11px] text-accent pt-0.5 shrink-0">{String(idx + 1).padStart(2, '0')}</span>
                       <span>{highlight}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
         {/* Catalog Button */}
-        <div className="mt-12 text-center">
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider px-8 py-4 rounded-full border border-emerald-500/50 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all shadow-sm font-semibold"
-          >
-            <FolderGit2 className="w-4 h-4" />
+        <div className="mt-6 text-center">
+          <Link href="/projects" className="btn">
+            <FolderGit2 className="w-4 h-4 text-accent" />
             <span>View All Projects Catalog Page</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
@@ -164,10 +142,7 @@ export default function Projects() {
       </section>
 
       {/* Quick Detail Modal */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </>
   );
 }
