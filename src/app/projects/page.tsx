@@ -28,7 +28,7 @@ export default function ProjectsPage() {
     <div className="min-h-screen flex flex-col text-ink">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-10 pt-24 sm:pt-28 pb-14">
+      <main className="flex-1 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-14">
         {/* Breadcrumb */}
         <Link
           href="/"
@@ -62,7 +62,7 @@ export default function ProjectsPage() {
               placeholder="Search projects by name or technology (e.g. React, MongoDB, Express)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 rounded-[3px] bg-bg border border-line text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
+              className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-bg border border-line text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
             />
           </div>
 
@@ -85,7 +85,7 @@ export default function ProjectsPage() {
 
         {/* Projects Grid */}
         {filteredProjects.length === 0 ? (
-          <div className="text-center py-12 px-6 rounded-[4px] border border-dashed border-line-strong">
+          <div className="text-center py-12 px-6 rounded-2xl border border-dashed border-line-strong">
             <p className="font-mono text-sm text-muted">No projects match your search query.</p>
             <button
               onClick={() => {

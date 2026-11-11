@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowRight, Copy, Check, Download } from 'lucide-react';
+import HeroCodeCard from './HeroCodeCard';
 
 const pill =
-  'flex items-center gap-2 px-3 py-2 rounded-[3px] bg-surface border border-line text-ink-2 text-xs font-mono transition-colors';
+  'flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface border border-line text-ink-2 text-[13px] font-medium transition-colors';
 
 const stats = [
   { value: 'MERN', label: 'Core Tech Stack', accent: true },
@@ -24,21 +25,24 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative pt-28 sm:pt-32 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <section id="hero" className="relative pt-28 sm:pt-32 pb-12 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-14 items-center">
+        {/* Left: intro */}
+        <div className="lg:col-span-7">
       {/* Status Badge */}
-      <div className="rise rise-1 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-muted mb-5">
-        <span className="h-2 w-2 rounded-full bg-accent" />
+      <div className="rise rise-1 section-label mb-5">
         <span>Open for MERN & Full-Stack Roles</span>
       </div>
 
       {/* Headline */}
-      <h1 className="rise rise-2 font-display font-extrabold text-6xl sm:text-8xl lg:text-9xl xl:text-[10rem] tracking-[-0.045em] leading-[0.86] text-ink">
+      <h1 className="rise rise-2 font-display font-extrabold text-6xl sm:text-8xl lg:text-8xl xl:text-9xl tracking-[-0.045em] leading-[0.92] text-ink">
         Mashroof <br className="hidden sm:inline" />
         <span className="text-accent">PP</span>
+        <span className="text-amber">.</span>
       </h1>
 
       {/* Subtitle */}
-      <p className="rise rise-3 mt-6 font-mono text-sm uppercase tracking-[0.14em] text-ink">
+      <p className="rise rise-3 mt-6 text-xs font-bold uppercase tracking-[0.2em] text-ink">
         Full Stack Developer · React & Node.js
       </p>
 
@@ -76,7 +80,7 @@ export default function Hero() {
       </div>
 
       {/* Hero Buttons */}
-      <div className="rise rise-5 mt-4 flex flex-wrap items-center gap-2">
+      <div className="rise rise-5 mt-6 flex flex-wrap items-center gap-3">
         <Link href="#projects" className="btn btn-primary group">
           <span>View Projects</span>
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -94,14 +98,22 @@ export default function Hero() {
         </a>
       </div>
 
-      {/* Stats Grid — hairline ledger */}
-      <div className="rise rise-6 mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px bg-line border border-line rounded-[4px] overflow-hidden">
+        </div>
+
+        {/* Right: code card */}
+        <div className="hidden lg:block lg:col-span-5 rise rise-4 pb-6">
+          <HeroCodeCard />
+        </div>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="rise rise-6 mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px bg-line border border-line rounded-2xl overflow-hidden">
         {stats.map((s) => (
-          <div key={s.label} className="bg-bg px-4 py-4">
-            <div className={`font-display text-3xl sm:text-4xl font-bold tracking-tight ${s.accent ? 'text-accent' : 'text-ink'}`}>
+          <div key={s.label} className="bg-surface px-5 py-4">
+            <div className={`font-display text-3xl sm:text-4xl font-extrabold tracking-tight ${s.accent ? 'text-accent' : 'text-ink'}`}>
               {s.value}
             </div>
-            <div className="font-mono text-[11px] text-muted uppercase tracking-[0.12em] mt-1">{s.label}</div>
+            <div className="text-[10px] font-bold text-muted uppercase tracking-[0.18em] mt-1">{s.label}</div>
           </div>
         ))}
       </div>

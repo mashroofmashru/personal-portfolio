@@ -16,21 +16,21 @@ const capabilities = [
 
 export default function About() {
   return (
-    <section id="about" className="py-14 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <section id="about" className="py-14 sm:py-16 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       <div className="section-label"><b>01</b> // About Me</div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start mt-6">
         {/* Profile Info Card Left */}
         <div className="lg:col-span-4 lg:sticky lg:top-24">
           <div className="panel p-3">
-            <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[2px] bg-surface-2 group">
+            <div className="relative w-full aspect-[4/5] overflow-hidden rounded-md bg-surface-2 group">
               <Image
                 src="/profile.jpg"
                 alt="Mashroof PP"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 400px"
-                className="object-cover object-center grayscale-[35%] group-hover:grayscale-0 group-hover:scale-[1.02] transition duration-500"
+                className="object-cover object-center group-hover:scale-[1.02] transition duration-500"
               />
             </div>
 
@@ -63,7 +63,7 @@ export default function About() {
             Full-stack web development with <span className="text-accent">Node.js & React</span>
           </h2>
 
-          <div className="space-y-4 text-ink-2 text-base sm:text-lg leading-relaxed max-w-3xl">
+          <div className="space-y-4 text-ink-2 text-base sm:text-lg leading-relaxed">
             <p>
               I am a BCA student and developer based in Kannur, Kerala. I build web applications using JavaScript, React, Node.js, Express, and MongoDB.
             </p>
@@ -76,7 +76,7 @@ export default function About() {
           </div>
 
           {/* Core Technical Capabilities Grid */}
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-px bg-line border border-line rounded-[4px] overflow-hidden">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-px bg-line border border-line rounded-2xl overflow-hidden">
             {capabilities.map(({ icon: Icon, title, body }) => (
               <div key={title} className="bg-surface p-5 flex items-start gap-3.5 group">
                 <Icon className="w-5 h-5 mt-0.5 shrink-0 text-accent" />

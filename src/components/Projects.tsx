@@ -20,7 +20,7 @@ export default function Projects() {
 
   return (
     <>
-      <section id="projects" className="py-14 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <section id="projects" className="py-14 sm:py-16 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="section-label"><b>03</b> // Projects & Code</div>
 
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
@@ -114,7 +114,7 @@ export default function Projects() {
               </div>
 
               {/* Architecture Bullets */}
-              <div className="lg:col-span-5 p-5 rounded-[3px] bg-surface-2 border border-line">
+              <div className="lg:col-span-5 p-5 rounded-xl bg-surface-2 border border-line">
                 <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-ink font-medium pb-2.5 mb-3 border-b border-line">
                   <Code2 className="w-4 h-4 text-accent" /> Key Implementation Details
                 </div>

@@ -71,7 +71,8 @@ export default function Skills() {
     activeTab === 'all' ? categories : categories.filter((c) => c.id === activeTab);
 
   return (
-    <section id="skills" className="py-14 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+    <section id="skills" className="py-14 sm:py-16 bg-surface-2/60 border-y border-line">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       <div className="section-label"><b>02</b> // Skills & Technical Stack</div>
 
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
@@ -106,7 +107,7 @@ export default function Skills() {
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 ${
           activeTab === 'all' ? 'lg:grid-cols-4' : 'lg:grid-cols-2'
-        } gap-px bg-line border border-line rounded-[4px] overflow-hidden`}
+        } gap-px bg-line border border-line rounded-2xl overflow-hidden`}
       >
         {filteredCategories.map((cat) => {
           const IconComp = cat.icon;
@@ -133,6 +134,7 @@ export default function Skills() {
             </div>
           );
         })}
+      </div>
       </div>
     </section>
   );

@@ -9,7 +9,7 @@ export default function Footer() {
 
   return (
     <footer className="py-5 border-t border-line">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="font-mono text-[11px] uppercase tracking-wider text-muted">
           © {new Date().getFullYear()} Mashroof PP · All Rights Reserved
         </div>

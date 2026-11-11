@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import Ticker from '@/components/Ticker';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
@@ -14,6 +15,7 @@ export default function Home() {
       <ScrollObserver />
       <Navbar />
       <Hero />
+      <Ticker />
       <About />
       <Skills />
       <Projects />

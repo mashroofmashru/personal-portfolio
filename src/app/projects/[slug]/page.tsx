@@ -36,7 +36,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
     <div className="min-h-screen flex flex-col text-ink">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-10 pt-24 sm:pt-28 pb-14">
+      <main className="flex-1 max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-14">
         {/* Breadcrumb */}
         <div className="flex items-center justify-between gap-3 mb-6">
           <Link
@@ -111,7 +111,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
             <h2 className={`${blockHeading} mb-3`}>
               <Layers className="w-4 h-4 text-accent" /> Detailed Technology Stack
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line rounded-[4px] overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line rounded-2xl overflow-hidden">
               {project.techStackDetailed.map((group, idx) => (
                 <div key={idx} className="bg-surface p-5">
                   <span className="font-mono text-[11px] uppercase tracking-wider text-muted">{group.category}</span>
@@ -128,7 +128,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
           {/* Features */}
           <div>
             <h2 className={`${blockHeading} mb-3`}>Features List</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line rounded-[4px] overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line rounded-2xl overflow-hidden">
               {project.features.map((feature, idx) => (
                 <div key={idx} className="bg-surface p-4 flex items-start gap-3">
                   <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />

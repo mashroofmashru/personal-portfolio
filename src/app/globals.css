@@ -2,33 +2,49 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ---------- Design tokens ---------- */
+/* ---------- Design tokens ----------
+   Cream paper, deep navy ink, periwinkle accent, marigold highlight. */
 :root {
-  --bg: #f3f0e8;
-  --surface: #faf8f3;
-  --surface-2: #ebe7dc;
-  --ink: #17150f;
-  --ink-2: #3a372e;
-  --muted: #6f6b61;
-  --line: #d8d2c3;
-  --line-strong: #bfb8a6;
-  --accent: #c93c0c;
-  --accent-ink: #fff8f2;
-  --accent-soft: rgba(201, 60, 12, 0.08);
+  --bg: #f6f2ea;
+  --surface: #fcfaf5;
+  --surface-2: #efe9dc;
+  --ink: #1c1d3f;
+  --ink-2: #45465f;
+  --muted: #6e6f84;
+  --line: #e4ddcd;
+  --line-strong: #cfc6b2;
+  --accent: #5357d3;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(83, 87, 211, 0.1);
+  --amber: #f5b544;
+  --amber-ink: #1c1d3f;
+  /* navy feature band (stays navy in both themes) */
+  --band: #1a1b3a;
+  --band-ink: #f6f2ea;
+  --band-muted: #b4b5cf;
+  --band-accent: #9ea1f5;
+  --band-line: #2f3060;
 }
 
 html.dark {
-  --bg: #0e0d0b;
-  --surface: #151411;
-  --surface-2: #1c1a16;
-  --ink: #f2eee5;
-  --ink-2: #c8c2b5;
-  --muted: #8b8579;
-  --line: #2a2823;
-  --line-strong: #3b3830;
-  --accent: #ff6a2b;
-  --accent-ink: #0e0d0b;
-  --accent-soft: rgba(255, 106, 43, 0.1);
+  --bg: #12132a;
+  --surface: #191a36;
+  --surface-2: #20213f;
+  --ink: #f4f0e7;
+  --ink-2: #cfcde0;
+  --muted: #9495b2;
+  --line: #2a2b4d;
+  --line-strong: #3a3b63;
+  --accent: #9295f4;
+  --accent-ink: #12132a;
+  --accent-soft: rgba(146, 149, 244, 0.12);
+  --amber: #f5b544;
+  --amber-ink: #12132a;
+  --band: #1f2046;
+  --band-ink: #f6f2ea;
+  --band-muted: #b4b5cf;
+  --band-accent: #a5a8f7;
+  --band-line: #34356a;
 }
 
 @theme inline {
@@ -43,11 +59,25 @@ html.dark {
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
+  --color-amber: var(--amber);
+  --color-amber-ink: var(--amber-ink);
+  --color-band: var(--band);
+  --color-band-ink: var(--band-ink);
+  --color-band-muted: var(--band-muted);
+  --color-band-accent: var(--band-accent);
+  --color-band-line: var(--band-line);
 
-  --font-display: var(--font-bricolage), ui-sans-serif, sans-serif;
-  --font-serif: var(--font-bricolage), ui-sans-serif, sans-serif;
-  --font-sans: var(--font-plex-sans), ui-sans-serif, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-display: var(--font-jakarta), ui-sans-serif, sans-serif;
+  --font-serif: var(--font-jakarta), ui-sans-serif, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, sans-serif;
+  /* small tracked caps labels use the same geometric sans */
+  --font-mono: var(--font-jakarta), ui-sans-serif, sans-serif;
+  /* real monospace, for code */
+  --font-code: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 @layer base {
@@ -64,33 +94,19 @@ html.dark {
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  /* faint grid paper texture */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 56px 56px;
-    opacity: 0.35;
-    mask-image: linear-gradient(to bottom, black, transparent 70vh);
+  /* --font-mono is the caps-label sans; real code uses --font-code */
+  code, pre, kbd, samp {
+    font-family: var(--font-code);
   }
 
   ::selection {
-    background-color: var(--accent);
-    color: var(--accent-ink);
+    background-color: var(--amber);
+    color: var(--amber-ink);
   }
 
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
-  }
-
-  h1, h2, h3 {
-    font-variation-settings: "wdth" 90;
   }
 }
 
@@ -103,6 +119,11 @@ html.dark {
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 .rise {
@@ -119,100 +140,113 @@ html.dark {
   animation: fadeIn 0.15s ease-out both;
 }
 
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise, .animate-fadeIn { animation: none; }
+  .rise, .animate-fadeIn, .marquee-track { animation: none; }
 }
 
 /* ---------- Components (layered so utilities can override) ---------- */
 @layer components {
 .glass-nav {
-  background-color: color-mix(in srgb, var(--bg) 86%, transparent);
+  background-color: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(12px);
 }
 
 .section-label {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  gap: 0.6rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
+  letter-spacing: 0.2em;
+  color: var(--ink);
   margin-bottom: 0.75rem;
 }
-.section-label::after {
+.section-label::before {
   content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--line);
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  flex-shrink: 0;
 }
-.section-label.center::before {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--line);
+.section-label.center {
+  justify-content: center;
 }
 .section-label b {
-  color: var(--accent);
-  font-weight: 500;
+  color: var(--muted);
+  font-weight: 700;
 }
 
 .chip {
-  font-family: var(--font-mono);
   font-size: 0.6875rem;
+  font-weight: 500;
   line-height: 1.4;
-  padding: 0.125rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   border: 1px solid var(--line);
   background: var(--surface-2);
   color: var(--ink-2);
-  border-radius: 2px;
+  border-radius: 999px;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 500;
-  padding: 0.7rem 1.1rem;
+  gap: 0.55rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.75rem 1.2rem;
   border: 1px solid var(--line-strong);
-  border-radius: 3px;
+  border-radius: 10px;
   color: var(--ink);
   background: var(--surface);
-  transition: background-color 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
 .btn:hover {
   border-color: var(--ink);
 }
 .btn-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+  box-shadow: 3px 3px 0 var(--accent);
+}
+.btn-primary:hover {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-ink);
+  box-shadow: 0 0 0 var(--accent);
+  transform: translate(1px, 1px);
 }
-.btn-primary:hover {
+.btn-amber {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: var(--amber-ink);
+}
+.btn-amber:hover {
   background: var(--ink);
   border-color: var(--ink);
   color: var(--bg);
 }
 
 .tab {
-  font-family: var(--font-mono);
   font-size: 0.75rem;
-  padding: 0.4rem 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
   border: 1px solid var(--line);
-  border-radius: 3px;
+  border-radius: 999px;
   color: var(--ink-2);
   background: var(--surface);
   transition: border-color 0.15s, color 0.15s, background-color 0.15s;
 }
 .tab:hover {
-  border-color: var(--ink);
-  color: var(--ink);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .tab[data-active="true"] {
   background: var(--ink);
@@ -223,32 +257,32 @@ html.dark {
 .panel {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 16px;
 }
 
 .link-arrow {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 500;
-  color: var(--accent);
-  text-underline-offset: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+  transition: color 0.15s, border-color 0.15s;
 }
 .link-arrow:hover {
-  text-decoration: underline;
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.55rem;
+  padding: 0.6rem;
   border: 1px solid var(--line);
-  border-radius: 3px;
+  border-radius: 10px;
   color: var(--ink-2);
   background: var(--surface);
   transition: color 0.15s, border-color 0.15s;
@@ -257,4 +291,9 @@ html.dark {
   color: var(--accent);
   border-color: var(--accent);
 }
+}
+
+/* Small caps labels (formerly monospace) read bolder in the geometric sans */
+@layer components {
+  .font-mono { font-weight: 600; }
 }

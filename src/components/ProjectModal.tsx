@@ -46,7 +46,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         </div>
 
         {/* Architecture Highlights */}
-        <div className="p-4 rounded-[3px] bg-surface-2 border border-line space-y-2">
+        <div className="p-4 rounded-xl bg-surface-2 border border-line space-y-2">
           <h3 className={`${heading} text-ink`}>
             <Cpu className="w-4 h-4 text-accent" /> Architecture Highlights
           </h3>
@@ -62,7 +62,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         {/* Key Challenges */}
         {project.keyChallenges && project.keyChallenges.length > 0 && (
-          <div className="p-4 rounded-[3px] bg-surface-2 border border-line space-y-2">
+          <div className="p-4 rounded-xl bg-surface-2 border border-line space-y-2">
             <h3 className={`${heading} text-ink`}>
               <AlertTriangle className="w-4 h-4 text-accent" /> Technical Challenges & Solutions
             </h3>
@@ -84,7 +84,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {project.techStackDetailed.map((group, idx) => (
-              <div key={idx} className="p-3 rounded-[3px] border border-line">
+              <div key={idx} className="p-3 rounded-xl border border-line">
                 <span className="font-mono text-[11px] uppercase tracking-wider text-muted">{group.category}</span>
                 <div className="flex flex-wrap gap-1.5 mt-2">
                   {group.items.map((item) => (
