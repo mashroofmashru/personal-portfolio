@@ -1,3 +1,4 @@
+
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
@@ -18,8 +19,45 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mashroof.in'),
+
   title: 'Mashroof PP — Full Stack Developer',
-  description: 'Full Stack Developer building web applications with React, Node.js, Express, and MongoDB.',
+
+  description:
+    'Full Stack Developer building web applications with React, Node.js, Express, and MongoDB.',
+
+  applicationName: 'Mashroof Portfolio',
+
+  openGraph: {
+    title: 'Mashroof PP — Full Stack Developer',
+    description:
+      'Explore my projects, skills, and experience as a Full Stack Developer.',
+    url: 'https://mashroof.in',
+    siteName: 'Mashroof Portfolio',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Mashroof PP — Full Stack Developer',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Mashroof PP — Full Stack Developer',
+    description:
+      'Explore my projects, skills, and experience as a Full Stack Developer.',
+    images: ['/og-image.png'],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export const viewport: Viewport = {
@@ -33,7 +71,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${plexMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${jakarta.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
